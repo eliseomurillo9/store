@@ -6,35 +6,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store</title>
-    <link rel="icon" href="../public/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="../public/favicon.ico" type="image/ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+        integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="CSS.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header>
         <nav>
-            <div>
-                <img src="../img/logo.png" />
-            </div>
-            <div>
-                <a href="#">
-                    <span>inicio</span>
-                </a>
+            <div class="menu">
+                <div>
+                    <img src="../img/logo.png" />
+                </div>
+                <div>
+                    <a href="#">
+                        <span><br>Inicio</span>
+                    </a>
 
+                </div>
+                <div>
+                    <a href="#">
+                        <span><br>Products</span>
+                    </a>
+                </div>
             </div>
-            <div>
-                <a href="#">
-                    <span>Products</span>
-                </a>
-            </div>
-            <div>
-                <a>
-                    <i class="icofont-cart-alt icofont-1x"></i>
+            <div class="nav-cart">
+                <a><br>
+                    <i class="fa-solid fa-cart-shopping"></i></i>
                     <span>Cart</span>
                 </a>
             </div>
         </nav>
     </header>
+    <div class="products">
+        <div>
+            <h1>Top Products</h1>
+        </div>
+        <div class="card">
+            <img src="../img/POST12.jpg" alt="Product" />
+            <h3>Monster Case</h3>
+            <span>$35.00</span>
+            <input type="number" class="counter" />
+            <i class="fa-solid fa-cart-plus"></i>
+        </div>
+    </div>
 </body>
 
 </html>
