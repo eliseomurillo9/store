@@ -12,48 +12,130 @@
     <link rel="stylesheet" href="CSS.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;900;100;200&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <header>
-        <nav>
-            <div class="menu">
-                <div>
-                    <img src="../img/logo.png" />
-                </div>
-                <div>
-                    <a href="#">
-                        <span><br>Inicio</span>
-                    </a>
+    <div id="app">
+        <header>
+            <nav>
+                <div class="menu">
+                    <div>
+                        <img src="../img/logo.png" />
+                    </div>
+                    <div>
+                        <a href="#">
+                            <span><br>Inicio</span>
+                        </a>
 
+                    </div>
+                    <div>
+                        <a href="#">
+                            <span><br>Products</span>
+                        </a>
+                    </div>
                 </div>
-                <div>
-                    <a href="#">
-                        <span><br>Products</span>
+                <div class="nav-cart">
+                    <a @click="showCart"><br>
+                        <i class="fa-solid fa-cart-shopping"></i></i>
+                        <span>Cart</span>
                     </a>
                 </div>
-            </div>
-            <div class="nav-cart">
-                <a><br>
-                    <i class="fa-solid fa-cart-shopping"></i></i>
-                    <span>Cart</span>
-                </a>
-            </div>
-        </nav>
-    </header>
-    <div class="products">
-        <div>
-            <h1>Top Products</h1>
+            </nav>
+        </header>
+        <div class="portada">
+            <video loop autoplay>
+                <source src="../img/portrait.mp4" type="video/mp4">
+            </video>
         </div>
-        <div class="card">
-            <img src="../img/POST12.jpg" alt="Product" />
-            <h3>Monster Case</h3>
-            <span>$35.00</span>
-            <input type="number" class="counter" />
-            <i class="fa-solid fa-cart-plus"></i>
+        <div class="products">
+            <div>
+                <h1>{{titleProducts}}</h1>
+            </div>
+            <div class="card">
+                <img src="../img/POST12.jpg" alt="Product" />
+                <h3>Monster Case</h3>
+                <span>$35.00</span>
+                <input type="number" class="counter" />
+                <i class="fa-solid fa-cart-plus"></i>
+            </div>
         </div>
+        <cart-show v-if='ifShowCart' />
     </div>
+    <script src="https://unpkg.com/vue@3"></script>
+
+    <script>
+        let app = Vue.createApp({
+            data() {
+                return {
+                    titleProducts: "Top Products",
+                    ifShowCart: false,
+                }
+            }
+            ,
+            methods: {
+                showCart() {
+                    this.ifShowCart = !this.ifShowCart
+                },
+                async import() {
+                    const response = await fetch('http://localhost:3000/products');
+                    const data = await response.json();
+
+                    console.log(data)
+                },
+            },
+
+            async mounted() {
+                await this.import();
+            },
+
+            created(){
+             console.log("created")   
+            }
+
+        })
+        app.component('cart-show', {
+            template: `
+            <div class="align-cart">
+            <div class="cart">
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th><span>Product</span></th>
+                                <th><span>Price</span></th>
+                                <th><span>Qty</span></th>
+                                <th><span>Total</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Air</td>
+                                <td>$35.00</td>
+                                <td>2</td>
+                                <td>$70.00</td>
+                                <td class="button-X">
+                                    <button class="delete">X</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>No producst in the cart</p>
+                    <span class="total"><strong>Total:</strong></span>
+                </div>
+            </div>
+        </div>`
+        }),
+
+
+            app.mount("#app")
+
+
+    </script>
 </body>
+<footer>
+    <p>Page created for personal project - Eliseo Murillo</p>
+</footer>
 
 </html>
