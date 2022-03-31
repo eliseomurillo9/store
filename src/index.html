@@ -49,16 +49,21 @@
                 <source src="../img/portrait.mp4" type="video/mp4">
             </video>
         </div>
-        <div class="products">
-            <div>
-                <h1>{{titleProducts}}</h1>
-            </div>
-            <div class="card">
-                <img src="../img/POST12.jpg" alt="Product" />
-                <h3>Monster Case</h3>
-                <span>$35.00</span>
-                <input type="number" class="counter" />
-                <i class="fa-solid fa-cart-plus"></i>
+        <div class="title-products">
+            <h1 @click="downProducts">{{titleProducts}} <i class="fa-solid fa-angle-down"></i></h1>
+        </div>
+        <div class="products" v-if="showProducts">
+            <div v-for="(articles, i) in products.slice(0,3)" :key="i" >
+                <div class="top-products" >
+                    <div class="card" >
+                        <img :src="articles.img" alt="Product" />
+                        <h3>{{articles.name}}</h3>
+                        <span>${{articles.price}}
+                        </span>
+                        <input type="number" class="counter" v-model.number="quantity"/>
+                        <i @click="functionAgregar(article)" class="fa-solid fa-cart-plus"></i>
+                    </div>
+                </div>
             </div>
         </div>
         <cart-show v-if='ifShowCart' />
@@ -71,6 +76,9 @@
                 return {
                     titleProducts: "Top Products",
                     ifShowCart: false,
+                    products: [],
+                    quantity: '',  
+                    showProducts: true,         
                 }
             }
             ,
@@ -82,16 +90,26 @@
                     const response = await fetch('http://localhost:3000/products');
                     const data = await response.json();
 
-                    console.log(data)
+                    this.products = data
                 },
+
+                functionAgregar(article){
+                   console.log(this.article[price])
+                    
+                },
+
+                downProducts(){
+                    this.showProducts = !this.showProducts
+                }
             },
 
             async mounted() {
                 await this.import();
+
             },
 
-            created(){
-             console.log("created")   
+            created() {
+                console.log("created")
             }
 
         })
